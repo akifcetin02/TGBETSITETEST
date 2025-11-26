@@ -30,7 +30,7 @@
     <!-- Kullanıcı Çubuğu -->
     <div id="tg-user" class="fixed top-4 right-4 flex items-center bg-gray-900 px-4 py-2 rounded-lg shadow-lg z-50 space-x-2">
         <span id="tg-name" class="font-semibold text-white">Misafir</span>
-        <img id="tg-avatar" src="https://i.pravatar.cc/40" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-secondary">
+        <img id="tg-avatar" src="" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-secondary">
     </div>
 
     <main class="container mx-auto px-4 py-6">
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Game Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6" id="game-grid">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <!-- Oyun Kartları JS ile eklenecek -->
         </div>
 
@@ -93,8 +93,28 @@
 
     <custom-footer></custom-footer>
 
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         feather.replace();
+        
+        window.Telegram.WebApp.ready();
+
+        // URL parametreleri
+        const urlParams = new URLSearchParams(window.location.search);
+        let username = urlParams.get('username');
+        let user_id = urlParams.get('user_id');
+
+        // Telegram Mini App bilgisi varsa kullan
+        const tgUser = Telegram.WebApp.initDataUnsafe?.user || null;
+        if(tgUser){
+            username = tgUser.username || tgUser.first_name || username || 'Misafir';
+            user_id = tgUser.id || user_id;
+        }
+
+        document.getElementById('tg-name').innerText = username;
+        document.getElementById('tg-avatar').src = user_id
+            ? `https://avatars.dicebear.com/api/avataaars/${user_id}.svg`
+            : `https://avatars.dicebear.com/api/avataaars/random.svg`;
     </script>
     <script src="script.js"></script>
 </body>
