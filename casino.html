@@ -9,30 +9,37 @@
 </head>
 <body class="bg-primary text-white">
 
-    <!-- Telegram Kullanıcı Bilgisi -->
-    <div id="tg-user" class="flex justify-between items-center p-4 bg-gray-900 rounded-b-lg">
-        <span id="tg-name" class="font-semibold text-white"></span>
-        <img id="tg-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full">
+    <!-- Kullanıcı Çubuğu -->
+    <div id="tg-user" class="fixed top-4 right-4 flex items-center bg-gray-900 px-4 py-2 rounded-lg shadow-lg z-50 space-x-2">
+        <span id="tg-name" class="font-semibold text-white">Misafir</span>
+        <img id="tg-avatar" src="" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-secondary">
     </div>
 
     <main class="container mx-auto px-4 py-6">
-        <h1 class="text-3xl font-bold mb-4">Casino Sayfasına Hoş Geldiniz</h1>
-        <p class="mb-4">Artık giriş yapmış durumdasınız. Oyunlara başlayabilirsiniz!</p>
+        <h1 class="text-3xl font-bold mb-8">Casino Sayfası</h1>
+        <p class="text-gray-300">Burada seçilen oyun veya casino içeriği gösterilecek.</p>
     </main>
 
     <script>
-        // Telegram Mini App
-        if(window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready();
-            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+        // Kullanıcı bilgilerini ayarla
+        function setTelegramUser() {
+            let username = "Misafir";
+            let avatarUrl = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70) + 1}`;
 
-            document.getElementById("tg-name").textContent = tgUser?.username || tgUser?.first_name || "Misafir";
-            document.getElementById("tg-avatar").src = tgUser?.photo_url || `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70) + 1}`;
-        } else {
-            document.getElementById("tg-name").textContent = "Misafir";
-            document.getElementById("tg-avatar").src = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70) + 1}`;
+            if(window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.ready();
+                const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+                if(tgUser) {
+                    username = tgUser.username || tgUser.first_name || "Misafir";
+                    avatarUrl = tgUser.photo_url || avatarUrl;
+                }
+            }
+
+            document.getElementById("tg-name").textContent = username;
+            document.getElementById("tg-avatar").src = avatarUrl;
         }
-    </script>
 
+        setTelegramUser();
+    </script>
 </body>
 </html>
