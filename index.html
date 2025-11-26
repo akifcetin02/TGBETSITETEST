@@ -8,20 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0a192f',
-                        secondary: '#00ff9d',
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="bg-primary text-white">
 
@@ -54,22 +40,22 @@
         <!-- Search and Filter -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div class="relative w-full md:w-1/3">
-                <input type="text" placeholder="Oyun Ara..." class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary pl-10">
+                <input type="text" placeholder="Oyun Ara..." id="search" class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary pl-10">
                 <i data-feather="search" class="absolute left-3 top-2.5 text-gray-400"></i>
             </div>
             <div class="flex items-center space-x-2">
                 <span class="text-gray-400">Sırala:</span>
-                <select class="bg-gray-700 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary">
-                    <option>Popülerlik</option>
-                    <option>En Yeni</option>
-                    <option>A-Z</option>
-                    <option>Z-A</option>
+                <select id="sort" class="bg-gray-700 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary">
+                    <option value="popularity">Popülerlik</option>
+                    <option value="new">En Yeni</option>
+                    <option value="a-z">A-Z</option>
+                    <option value="z-a">Z-A</option>
                 </select>
             </div>
         </div>
 
         <!-- Game Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div id="game-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <!-- Oyun Kartları JS ile eklenecek -->
         </div>
 
@@ -93,29 +79,18 @@
 
     <custom-footer></custom-footer>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
     <script>
         feather.replace();
-        
-        window.Telegram.WebApp.ready();
 
-        // URL parametreleri
-        const urlParams = new URLSearchParams(window.location.search);
-        let username = urlParams.get('username');
-        let user_id = urlParams.get('user_id');
-
-        // Telegram Mini App bilgisi varsa kullan
-        const tgUser = Telegram.WebApp.initDataUnsafe?.user || null;
-        if(tgUser){
-            username = tgUser.username || tgUser.first_name || username || 'Misafir';
-            user_id = tgUser.id || user_id;
+        // Telegram Mini App kullanıcı bilgisi
+        if (window.Telegram?.WebApp) {
+            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+            if (tgUser) {
+                document.getElementById("tg-name").innerText = tgUser.username || tgUser.first_name || "Misafir";
+                document.getElementById("tg-avatar").src = `https://i.pravatar.cc/150?u=${tgUser.id}`;
+            }
         }
-
-        document.getElementById('tg-name').innerText = username;
-        document.getElementById('tg-avatar').src = user_id
-            ? `https://avatars.dicebear.com/api/avataaars/${user_id}.svg`
-            : `https://avatars.dicebear.com/api/avataaars/random.svg`;
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
