@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahis Bahane | Oyun</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+</head>
+<body class="bg-primary text-white">
+    <custom-navbar></custom-navbar>
+
+    <!-- Telegram Kullanıcı Bilgisi -->
+    <div id="tg-user" class="flex justify-end items-center p-4 space-x-2 bg-gray-900 rounded-b-lg">
+        <img id="tg-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full">
+        <span id="tg-name" class="font-semibold text-white"></span>
+    </div>
+
+    <main class="container mx-auto px-4 py-6">
+        <h1 class="text-3xl font-bold mb-8" id="game-title">Oyun Açılıyor...</h1>
+        <iframe id="game-frame" src="" class="w-full h-[600px] rounded-lg" frameborder="0"></iframe>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        // Telegram Mini App
+        if(window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+            if(tgUser) {
+                document.getElementById("tg-name").textContent = tgUser.first_name || tgUser.username;
+                document.getElementById("tg-avatar").src = tgUser.photo_url || "https://via.placeholder.com/40";
+            } else {
+                document.getElementById("tg-name").textContent = "Misafir";
+                document.getElementById("tg-avatar").src = "https://via.placeholder.com/40";
+            }
+        }
+
+        // URL param ile oyun seçimi
+        const params = new URLSearchParams(window.location.search);
+        const game = params.get('game') || 'default-game';
+        document.getElementById('game-title').textContent = game;
+
+        // iframe örnek olarak yönlendirme (senin ana oyun URL'ine göre değiştir)
+        document.getElementById('game-frame').src = `https://example.com/games/${game}`;
+    </script>
+</body>
+</html>
