@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahis Bahane | Ana Sayfa</title>
+    <title>Bahis Bahane | Casino Oyunları</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -22,31 +22,92 @@
             }
         }
     </script>
-    <!-- Telegram WebApp SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body class="bg-primary text-white">
     <custom-navbar></custom-navbar>
 
+    <!-- Telegram Kullanıcı Bilgisi -->
+    <div id="tg-user" class="flex justify-end items-center p-4 space-x-2 bg-gray-900 rounded-b-lg">
+        <img id="tg-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full">
+        <span id="tg-name" class="font-semibold text-white"></span>
+    </div>
+
     <main class="container mx-auto px-4 py-6">
-        <!-- Bilgilendirme ve Siteye Git Butonu -->
-        <section class="mb-12 text-center">
-            <h2 class="text-2xl font-bold mb-4">Hoş Geldin!</h2>
-            <p class="mb-6">Telegram Mini App üzerinden siteye giriş yapabilir ve bahis deneyimini keşfedebilirsin.</p>
-            <button id="tg-go-btn" class="bg-secondary hover:bg-green-400 text-primary font-bold py-3 px-6 rounded-full transition-all">
-                Siteye Git
-            </button>
-        </section>
+        <h1 class="text-3xl font-bold mb-8">Casino Oyunları</h1>
+        
+        <!-- Game Categories -->
+        <div class="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
+            <div class="flex space-x-2">
+                <button class="whitespace-nowrap px-4 py-2 bg-secondary text-primary font-bold rounded-full">Tüm Oyunlar</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Rulet</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Blackjack</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Slot</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Poker</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Bakara</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Canlı Casino</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Yeni Oyunlar</button>
+                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Popüler</button>
+            </div>
+        </div>
 
-        <!-- Mevcut site içerikleri -->
-        <!-- Hero Slider, Canlı Maçlar, Casino Oyunları vb. buraya eklenebilir -->
+        <!-- Search and Filter -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div class="relative w-full md:w-1/3">
+                <input type="text" placeholder="Oyun Ara..." class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary pl-10">
+                <i data-feather="search" class="absolute left-3 top-2.5 text-gray-400"></i>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-400">Sırala:</span>
+                <select class="bg-gray-700 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary">
+                    <option>Popülerlik</option>
+                    <option>En Yeni</option>
+                    <option>A-Z</option>
+                    <option>Z-A</option>
+                </select>
+            </div>
+        </div>
 
+        <!-- Game Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <!-- Örnek oyun kartı -->
+            <div class="game-card bg-gray-800 rounded-lg overflow-hidden transition-all hover:shadow-lg hover:shadow-secondary/20">
+                <div class="relative">
+                    <img src="http://static.photos/gaming/640x360/6" alt="Rulet" class="w-full h-40 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Avrupa Ruleti</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Rulet</span>
+                        <button class="text-secondary hover:text-green-400 play-btn" data-game="avrupa-ruleti">
+                            <i data-feather="play"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diğer oyun kartları aynı şekilde, sadece play-btn ekle -->
+        </div>
     </main>
 
     <custom-footer></custom-footer>
 
     <script>
         feather.replace();
+
+        // Telegram Mini App
+        if(window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+
+            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+            if(tgUser) {
+                document.getElementById("tg-name").textContent = tgUser.first_name || tgUser.username;
+                document.getElementById("tg-avatar").src = tgUser.photo_url || "https://via.placeholder.com/40";
+            } else {
+                document.getElementById("tg-name").textContent = "Misafir";
+                document.getElementById("tg-avatar").src = "https://via.placeholder.com/40";
+            }
+        }
     </script>
     <script src="script.js"></script>
 </body>
