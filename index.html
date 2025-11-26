@@ -1,96 +1,45 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahis Bahane | Casino Oyunları</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahis Bahane | Casino Oyunları</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<style>
+body { background-color: #0a192f; color: white; }
+</style>
 </head>
 <body class="bg-primary text-white">
 
-    <custom-navbar></custom-navbar>
+<!-- Kullanıcı Çubuğu -->
+<div id="tg-user" class="fixed top-4 right-4 flex items-center bg-gray-900 px-4 py-2 rounded-lg shadow-lg z-50 space-x-2">
+    <span id="tg-name" class="font-semibold text-white">Misafir</span>
+    <img id="tg-avatar" src="https://i.pravatar.cc/150?u=random" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-green-500">
+</div>
 
-    <!-- Kullanıcı Çubuğu -->
-    <div id="tg-user" class="fixed top-4 right-4 flex items-center bg-gray-900 px-4 py-2 rounded-lg shadow-lg z-50 space-x-2">
-        <span id="tg-name" class="font-semibold text-white">Misafir</span>
-        <img id="tg-avatar" src="" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-secondary">
-    </div>
+<main class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold mb-8">Casino Oyunları</h1>
+    <div id="game-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+</main>
 
-    <main class="container mx-auto px-4 py-6">
-        <h1 class="text-3xl font-bold mb-8">Casino Oyunları</h1>
+<script src="script.js"></script>
+<script>
+feather.replace();
 
-        <!-- Game Categories -->
-        <div class="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
-            <div class="flex space-x-2">
-                <button class="whitespace-nowrap px-4 py-2 bg-secondary text-primary font-bold rounded-full">Tüm Oyunlar</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Rulet</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Blackjack</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Slot</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Poker</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Bakara</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Canlı Casino</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Yeni Oyunlar</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Popüler</button>
-            </div>
-        </div>
+// Telegram Mini App kullanıcı bilgisi al
+if (window.Telegram?.WebApp) {
+    const tgUser = window.Telegram.WebApp.initDataUnsafe?.user;
+    if (tgUser) {
+        // Kullanıcı adı veya first_name
+        const name = tgUser.username || tgUser.first_name || "Misafir";
+        document.getElementById("tg-name").innerText = name;
 
-        <!-- Search and Filter -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div class="relative w-full md:w-1/3">
-                <input type="text" placeholder="Oyun Ara..." id="search" class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary pl-10">
-                <i data-feather="search" class="absolute left-3 top-2.5 text-gray-400"></i>
-            </div>
-            <div class="flex items-center space-x-2">
-                <span class="text-gray-400">Sırala:</span>
-                <select id="sort" class="bg-gray-700 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary">
-                    <option value="popularity">Popülerlik</option>
-                    <option value="new">En Yeni</option>
-                    <option value="a-z">A-Z</option>
-                    <option value="z-a">Z-A</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Game Grid -->
-        <div id="game-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            <!-- Oyun Kartları JS ile eklenecek -->
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-center mt-12">
-            <nav class="flex items-center space-x-2">
-                <button class="px-3 py-1 rounded border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">
-                    <i data-feather="chevron-left"></i>
-                </button>
-                <button class="px-3 py-1 rounded bg-secondary text-primary font-bold">1</button>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">2</button>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">3</button>
-                <span class="px-3 py-1 text-gray-400">...</span>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">10</button>
-                <button class="px-3 py-1 rounded border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">
-                    <i data-feather="chevron-right"></i>
-                </button>
-            </nav>
-        </div>
-    </main>
-
-    <custom-footer></custom-footer>
-
-    <script src="script.js"></script>
-    <script>
-        feather.replace();
-
-        // Telegram Mini App kullanıcı bilgisi
-        if (window.Telegram?.WebApp) {
-            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
-            if (tgUser) {
-                document.getElementById("tg-name").innerText = tgUser.username || tgUser.first_name || "Misafir";
-                document.getElementById("tg-avatar").src = `https://i.pravatar.cc/150?u=${tgUser.id}`;
-            }
-        }
-    </script>
+        // Avatar: rastgele veya ID ile benzersiz
+        const avatarUrl = tgUser.id ? `https://i.pravatar.cc/150?u=${tgUser.id}` : `https://i.pravatar.cc/150?u=random`;
+        document.getElementById("tg-avatar").src = avatarUrl;
+    }
+}
+</script>
 </body>
 </html>
