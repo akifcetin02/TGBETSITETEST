@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahis Bahane | Ana Sayfa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a192f',
+                        secondary: '#00ff9d',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body class="bg-primary text-white">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-6">
+        <!-- Bilgilendirme ve Siteye Git Butonu -->
+        <section class="mb-12 text-center">
+            <h2 class="text-2xl font-bold mb-4">Hoş Geldin!</h2>
+            <p class="mb-6">Telegram Mini App üzerinden siteye giriş yapabilir ve bahis deneyimini keşfedebilirsin.</p>
+            <button id="tg-go-btn" class="bg-secondary hover:bg-green-400 text-primary font-bold py-3 px-6 rounded-full transition-all">
+                Siteye Git
+            </button>
+        </section>
+
+        <!-- Mevcut site içerikleri -->
+        <!-- Hero Slider, Canlı Maçlar, Casino Oyunları vb. buraya eklenebilir -->
+
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
