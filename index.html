@@ -1,81 +1,136 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG Bet Test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bahis Bahane | Ana Sayfa</title>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Stil -->
+  <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b0f17;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+  <!-- Tailwind (opsiyonel) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        .header {
-            padding: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            background: #131a26;
-        }
+  <!-- Feather icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
 
-        .userbox {
-            background: #1c2533;
-            padding: 15px;
-            margin: 15px;
-            border-radius: 12px;
-            text-align: left;
-            font-size: 18px;
-        }
-
-        .category_bar {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px;
-        }
-
-        .category {
-            background: #2a3547;
-            padding: 10px 15px;
-            border-radius: 999px;
-            white-space: nowrap;
-            font-size: 15px;
-        }
-    </style>
+  <!-- TELEGRAM WEBAPP API (miniapp için) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
+<body class="bg-gradient-to-b from-[#07080a] via-[#0b0e13] to-[#07101a] text-white antialiased">
 
-    <div class="header">TG BET TEST</div>
+  <!-- HEADER: user panel HEADER içinde, fixed değil -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-title">BAHİS BAHANE</div>
+      </div>
 
-    <div id="userBox" class="userbox">Yükleniyor...</div>
+      <nav class="nav-links" aria-label="site navigation">
+        <a class="nav-link">Spor Bahisleri</a>
+        <a class="nav-link">Canlı Bahis</a>
+        <a class="nav-link active">Casino</a>
+        <a class="nav-link">Slot</a>
+        <a class="nav-link">Promosyonlar</a>
+      </nav>
 
-    <div class="category_bar">
-        <div class="category">Canlı Casino</div>
-        <div class="category">Slot</div>
-        <div class="category">Rulet</div>
-        <div class="category">Blackjack</div>
-        <div class="category">Poker</div>
+      <!-- Kullanıcı paneli HEADER içinde (sağda) -->
+      <div id="user-panel" class="user-panel" role="region" aria-label="Kullanıcı Paneli">
+        <span id="tg-name" class="tg-name">Misafir</span>
+        <img id="tg-avatar" src="https://i.pravatar.cc/150?u=guest" alt="avatar" class="tg-avatar"/>
+      </div>
     </div>
+  </header>
 
-<script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+  <main class="main-container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1>Casino Arenasına Hoşgeldin</h1>
+        <p>En iyi slot oyunları, canlı rulet ve özel promosyonlar burada. Şimdi keşfet!</p>
+      </div>
+    </section>
 
-    let user = tg.initDataUnsafe.user;
-    
-    if (!user) {
-        document.getElementById("userBox").innerHTML = "Misafir";
-    } else {
-        const name = user.username || user.first_name;
-        document.getElementById("userBox").innerHTML = "Hoş geldin, " + name;
-    }
-</script>
+    <!-- Kategoriler -->
+    <section class="categories">
+      <div class="chips">
+        <button class="chip active">Tüm Oyunlar</button>
+        <button class="chip">Rulet</button>
+        <button class="chip">Blackjack</button>
+        <button class="chip">Slot</button>
+        <button class="chip">Poker</button>
+        <button class="chip">Canlı Casino</button>
+      </div>
+    </section>
 
+    <!-- Arama & Sıralama -->
+    <section class="search-row">
+      <div class="search-wrap">
+        <input id="search" placeholder="Oyun Ara..." />
+      </div>
+      <div class="sort-wrap">
+        <label>Sırala:</label>
+        <select id="sort">
+          <option>Popülerlik</option>
+          <option>En Yeni</option>
+          <option>A-Z</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Oyun ızgarası -->
+    <section class="games">
+      <h2>Popüler Oyunlar</h2>
+      <div id="game-grid" class="game-grid">
+        <!-- Örnek kartlar -->
+        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1600456899125-69a493e95c66?q=80&w=800')"></div><div class="card-body"><div class="card-title">Sweet Bonanza</div><div class="card-sub">Slot</div></div></div>
+        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=800')"></div><div class="card-body"><div class="card-title">Gates of Olympus</div><div class="card-sub">Slot</div></div></div>
+        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1545289417-1c3cb1c062a5?q=80&w=800')"></div><div class="card-body"><div class="card-title">Blackjack VIP</div><div class="card-sub">Blackjack</div></div></div>
+        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1560238970-cc0d7e0b1c1a?q=80&w=800')"></div><div class="card-body"><div class="card-title">Crazy Time</div><div class="card-sub">Canlı</div></div></div>
+        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=800')"></div><div class="card-body"><div class="card-title">Aviator</div><div class="card-sub">Slot</div></div></div>
+      </div>
+    </section>
+
+    <footer class="footer-note">@tgbetgiristest_bot</footer>
+  </main>
+
+  <script>feather.replace();</script>
+
+  <!-- Telegram miniapp bridge (SADECE varsa çalıştır) -->
+  <script>
+    (function(){
+      try {
+        if (window.Telegram && window.Telegram.WebApp) {
+          const tg = window.Telegram.WebApp;
+          // Expand miniapp to full height if Telegram supports it
+          if (typeof tg.expand === 'function') {
+            try { tg.expand(); } catch(e){ /* ignore */ }
+          }
+          tg.ready();
+
+          const user = tg.initDataUnsafe?.user;
+          if (user) {
+            const nameEl = document.getElementById('tg-name');
+            const avatarEl = document.getElementById('tg-avatar');
+
+            // set text (use username else first_name)
+            nameEl.textContent = user.username ? ('@' + user.username) : (user.first_name || 'Kullanıcı');
+            nameEl.classList.remove('hidden');
+
+            // avatar (use pravatar as fallback)
+            avatarEl.src = user.id ? `https://i.pravatar.cc/150?u=${user.id}` : 'https://i.pravatar.cc/150?u=guest';
+          }
+        } else {
+          // Normal tarayıcı: bırak Misafir (ve gizle isim kısa gösterimi)
+          // ensure name is "Misafir" visible
+          const nameEl = document.getElementById('tg-name');
+          nameEl.textContent = 'Misafir';
+        }
+      } catch (err) {
+        console.error('Telegram WebApp init error', err);
+      }
+    })();
+  </script>
 </body>
 </html>
