@@ -3,108 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahis Bahane | Casino Oyunları</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TG Bet Test</title>
 
-    <!-- Tailwind & Feather -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
-    <!--  ⚡ ZORUNLU TELEGRAM WEBAPP API  -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0f17;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            background: #131a26;
+        }
+
+        .userbox {
+            background: #1c2533;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .category_bar {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .category {
+            background: #2a3547;
+            padding: 10px 15px;
+            border-radius: 999px;
+            white-space: nowrap;
+            font-size: 15px;
+        }
+    </style>
 </head>
-<body class="bg-primary text-white">
+<body>
 
-    <custom-navbar></custom-navbar>
+    <div class="header">TG BET TEST</div>
 
-    <!-- Kullanıcı Çubuğu -->
-    <div id="tg-user" class="fixed top-4 right-4 flex items-center bg-gray-900 px-4 py-2 rounded-lg shadow-lg z-50 space-x-2">
-        <span id="tg-name" class="font-semibold text-white">Misafir</span>
-        <img id="tg-avatar" src="" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-secondary">
+    <div id="userBox" class="userbox">Yükleniyor...</div>
+
+    <div class="category_bar">
+        <div class="category">Canlı Casino</div>
+        <div class="category">Slot</div>
+        <div class="category">Rulet</div>
+        <div class="category">Blackjack</div>
+        <div class="category">Poker</div>
     </div>
 
-    <main class="container mx-auto px-4 py-6">
-        <h1 class="text-3xl font-bold mb-8">Casino Oyunları</h1>
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
 
-        <!-- Game Categories -->
-        <div class="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
-            <div class="flex space-x-2">
-                <button class="whitespace-nowrap px-4 py-2 bg-secondary text-primary font-bold rounded-full">Tüm Oyunlar</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Rulet</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Blackjack</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Slot</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Poker</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Bakara</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Canlı Casino</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Yeni Oyunlar</button>
-                <button class="whitespace-nowrap px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-full">Popüler</button>
-            </div>
-        </div>
-
-        <!-- Search and Filter -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div class="relative w-full md:w-1/3">
-                <input type="text" placeholder="Oyun Ara..." id="search" class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary pl-10">
-                <i data-feather="search" class="absolute left-3 top-2.5 text-gray-400"></i>
-            </div>
-            <div class="flex items-center space-x-2">
-                <span class="text-gray-400">Sırala:</span>
-                <select id="sort" class="bg-gray-700 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:border-secondary">
-                    <option value="popularity">Popülerlik</option>
-                    <option value="new">En Yeni</option>
-                    <option value="a-z">A-Z</option>
-                    <option value="z-a">Z-A</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Game Grid -->
-        <div id="game-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            <!-- Oyun Kartları JS ile eklenecek -->
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-center mt-12">
-            <nav class="flex items-center space-x-2">
-                <button class="px-3 py-1 rounded border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">
-                    <i data-feather="chevron-left"></i>
-                </button>
-                <button class="px-3 py-1 rounded bg-secondary text-primary font-bold">1</button>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">2</button>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">3</button>
-                <span class="px-3 py-1 text-gray-400">...</span>
-                <button class="px-3 py-1 rounded border border-gray-700 hover:bg-gray-700">10</button>
-                <button class="px-3 py-1 rounded border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">
-                    <i data-feather="chevron-right"></i>
-                </button>
-            </nav>
-        </div>
-    </main>
-
-    <custom-footer></custom-footer>
-
-    <script src="script.js"></script>
-
-    <!--  ✔️ TELEGRAM MINI APP KULLANICI VERİSİ  -->
-    <script>
-        feather.replace();
-
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-
-        const user = tg.initDataUnsafe?.user;
-
-        if (user) {
-            document.getElementById("tg-name").innerText =
-                user.username || user.first_name || "Kullanıcı";
-
-            document.getElementById("tg-avatar").src =
-                `https://i.pravatar.cc/150?u=${user.id}`;
-        } else {
-            console.log("Telegram Mini App kullanıcı bilgisi alınamadı.");
-        }
-    </script>
+    let user = tg.initDataUnsafe.user;
+    
+    if (!user) {
+        document.getElementById("userBox").innerHTML = "Misafir";
+    } else {
+        const name = user.username || user.first_name;
+        document.getElementById("userBox").innerHTML = "Hoş geldin, " + name;
+    }
+</script>
 
 </body>
 </html>
