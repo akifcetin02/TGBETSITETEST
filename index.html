@@ -17,11 +17,23 @@
     <!-- Üst Menü -->
     <header class="w-full bg-[#131820] shadow-lg">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+
+            <!-- Sol Logo -->
             <h1 class="text-2xl font-bold text-green-400 leading-tight">
                 BAHİS<br>BAHANE
             </h1>
 
-            <nav class="flex items-center space-x-4 text-gray-300 font-medium text-sm">
+            <!-- Hamburger Menü (Mobil) -->
+            <button id="menuToggle" class="text-white text-3xl md:hidden">
+                ☰
+            </button>
+
+            <!-- Menü -->
+            <nav id="menu"
+                class="hidden md:flex absolute md:static top-20 right-4 md:right-0 bg-[#131820] md:bg-transparent 
+                flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 px-6 py-4 md:p-0 rounded-lg md:rounded-none 
+                shadow-lg md:shadow-none text-gray-300 font-medium text-sm">
+
                 <a class="hover:text-green-400" href="#">Spor</a>
                 <a class="hover:text-green-400" href="#">Canlı</a>
                 <a class="hover:text-green-400" href="#">Casino</a>
@@ -30,6 +42,12 @@
             </nav>
         </div>
     </header>
+
+    <script>
+        document.getElementById("menuToggle").addEventListener("click", () => {
+            document.getElementById("menu").classList.toggle("hidden");
+        });
+    </script>
 
     <!-- Kullanıcı Paneli -->
     <div id="user-panel"
@@ -113,8 +131,6 @@
             if (window.Telegram && Telegram.WebApp) {
                 const data = Telegram.WebApp.initDataUnsafe;
 
-                console.log("Telegram Data:", data);
-
                 if (data && data.user) {
                     const user = data.user;
 
@@ -132,5 +148,4 @@
     </script>
 
 </body>
-
 </html>
