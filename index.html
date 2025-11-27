@@ -1,136 +1,96 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bahis Bahane | Ana Sayfa</title>
-
-  <!-- Stil -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Tailwind (opsiyonel) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Feather icons -->
-  <script src="https://unpkg.com/feather-icons"></script>
-
-  <!-- TELEGRAM WEBAPP API (miniapp için) -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahis Bahane | Ana Sayfa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
-<body class="bg-gradient-to-b from-[#07080a] via-[#0b0e13] to-[#07101a] text-white antialiased">
+<body class="bg-[#0B0E13] text-white min-h-screen">
 
-  <!-- HEADER: user panel HEADER içinde, fixed değil -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-title">BAHİS BAHANE</div>
-      </div>
+    <!-- Üst Menü -->
+    <header class="w-full bg-[#131820] shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-green-400">BAHİS BAHANE</h1>
 
-      <nav class="nav-links" aria-label="site navigation">
-        <a class="nav-link">Spor Bahisleri</a>
-        <a class="nav-link">Canlı Bahis</a>
-        <a class="nav-link active">Casino</a>
-        <a class="nav-link">Slot</a>
-        <a class="nav-link">Promosyonlar</a>
-      </nav>
+            <nav class="flex items-center space-x-6 text-gray-300 font-semibold">
+                <a class="hover:text-green-400" href="#">Spor Bahisleri</a>
+                <a class="hover:text-green-400" href="#">Canlı Bahis</a>
+                <a class="hover:text-green-400" href="#">Casino</a>
+                <a class="hover:text-green-400" href="#">Slot</a>
+                <a class="hover:text-green-400" href="#">Promosyonlar</a>
+            </nav>
+        </div>
+    </header>
 
-      <!-- Kullanıcı paneli HEADER içinde (sağda) -->
-      <div id="user-panel" class="user-panel" role="region" aria-label="Kullanıcı Paneli">
-        <span id="tg-name" class="tg-name">Misafir</span>
-        <img id="tg-avatar" src="https://i.pravatar.cc/150?u=guest" alt="avatar" class="tg-avatar"/>
-      </div>
+    <!-- Kullanıcı Paneli -->
+    <div class="fixed top-4 right-4 flex items-center bg-[#1A212C] px-4 py-2 rounded-lg shadow-lg z-50 space-x-2 border border-gray-700">
+        <span id="tg-name" class="font-semibold text-white">Misafir</span>
+        <img id="tg-avatar" src="https://i.pravatar.cc/150?u=guest" class="w-10 h-10 rounded-full border-2 border-green-500">
     </div>
-  </header>
 
-  <main class="main-container">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <h1>Casino Arenasına Hoşgeldin</h1>
-        <p>En iyi slot oyunları, canlı rulet ve özel promosyonlar burada. Şimdi keşfet!</p>
-      </div>
+    <!-- Slider / Banner -->
+    <section class="w-full mt-6">
+        <div class="container mx-auto px-4">
+            <div class="w-full h-48 rounded-xl bg-cover bg-center shadow-lg" style="background-image: url('https://images.unsplash.com/photo-1600359736075-8e7b3ce1e89c?q=80&w=1400');"></div>
+        </div>
     </section>
 
     <!-- Kategoriler -->
-    <section class="categories">
-      <div class="chips">
-        <button class="chip active">Tüm Oyunlar</button>
-        <button class="chip">Rulet</button>
-        <button class="chip">Blackjack</button>
-        <button class="chip">Slot</button>
-        <button class="chip">Poker</button>
-        <button class="chip">Canlı Casino</button>
-      </div>
+    <section class="container mx-auto px-4 mt-10">
+        <h2 class="text-2xl font-bold mb-4">Kategoriler</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">⚽ Spor</div>
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">🎲 Casino</div>
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">🎰 Slot</div>
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">🃏 Poker</div>
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">💎 VIP Oyunlar</div>
+            <div class="bg-[#161C24] p-4 rounded-xl hover:bg-[#1F2732] cursor-pointer text-center border border-gray-700">🔥 Popüler</div>
+        </div>
     </section>
 
-    <!-- Arama & Sıralama -->
-    <section class="search-row">
-      <div class="search-wrap">
-        <input id="search" placeholder="Oyun Ara..." />
-      </div>
-      <div class="sort-wrap">
-        <label>Sırala:</label>
-        <select id="sort">
-          <option>Popülerlik</option>
-          <option>En Yeni</option>
-          <option>A-Z</option>
-        </select>
-      </div>
+    <!-- Popüler Oyunlar -->
+    <section class="container mx-auto px-4 mt-10 mb-20">
+        <h2 class="text-2xl font-bold mb-4">Popüler Slot Oyunları</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6" id="game-grid">
+            <div class="bg-[#1A212C] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                <img src="https://images.unsplash.com/photo-1600456899125-69a493e95c66?q=80&w=500" class="w-full h-32 object-cover">
+                <div class="p-3 font-semibold">Sweet Bonanza</div>
+            </div>
+            <div class="bg-[#1A212C] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=500" class="w-full h-32 object-cover">
+                <div class="p-3 font-semibold">Gates of Olympus</div>
+            </div>
+            <div class="bg-[#1A212C] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                <img src="https://images.unsplash.com/photo-1545289417-1c3cb1c062a5?q=80&w=500" class="w-full h-32 object-cover">
+                <div class="p-3 font-semibold">Sugar Rush</div>
+            </div>
+            <div class="bg-[#1A212C] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                <img src="https://images.unsplash.com/photo-1560238970-cc0d7e0b1c1a?q=80&w=500" class="w-full h-32 object-cover">
+                <div class="p-3 font-semibold">Crazy Time</div>
+            </div>
+            <div class="bg-[#1A212C] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=500" class="w-full h-32 object-cover">
+                <div class="p-3 font-semibold">Aviator</div>
+            </div>
+        </div>
     </section>
 
-    <!-- Oyun ızgarası -->
-    <section class="games">
-      <h2>Popüler Oyunlar</h2>
-      <div id="game-grid" class="game-grid">
-        <!-- Örnek kartlar -->
-        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1600456899125-69a493e95c66?q=80&w=800')"></div><div class="card-body"><div class="card-title">Sweet Bonanza</div><div class="card-sub">Slot</div></div></div>
-        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=800')"></div><div class="card-body"><div class="card-title">Gates of Olympus</div><div class="card-sub">Slot</div></div></div>
-        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1545289417-1c3cb1c062a5?q=80&w=800')"></div><div class="card-body"><div class="card-title">Blackjack VIP</div><div class="card-sub">Blackjack</div></div></div>
-        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1560238970-cc0d7e0b1c1a?q=80&w=800')"></div><div class="card-body"><div class="card-title">Crazy Time</div><div class="card-sub">Canlı</div></div></div>
-        <div class="card"><div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=800')"></div><div class="card-body"><div class="card-title">Aviator</div><div class="card-sub">Slot</div></div></div>
-      </div>
-    </section>
+    <script>
+        feather.replace();
 
-    <footer class="footer-note">@tgbetgiristest_bot</footer>
-  </main>
-
-  <script>feather.replace();</script>
-
-  <!-- Telegram miniapp bridge (SADECE varsa çalıştır) -->
-  <script>
-    (function(){
-      try {
-        if (window.Telegram && window.Telegram.WebApp) {
-          const tg = window.Telegram.WebApp;
-          // Expand miniapp to full height if Telegram supports it
-          if (typeof tg.expand === 'function') {
-            try { tg.expand(); } catch(e){ /* ignore */ }
-          }
-          tg.ready();
-
-          const user = tg.initDataUnsafe?.user;
-          if (user) {
-            const nameEl = document.getElementById('tg-name');
-            const avatarEl = document.getElementById('tg-avatar');
-
-            // set text (use username else first_name)
-            nameEl.textContent = user.username ? ('@' + user.username) : (user.first_name || 'Kullanıcı');
-            nameEl.classList.remove('hidden');
-
-            // avatar (use pravatar as fallback)
-            avatarEl.src = user.id ? `https://i.pravatar.cc/150?u=${user.id}` : 'https://i.pravatar.cc/150?u=guest';
-          }
-        } else {
-          // Normal tarayıcı: bırak Misafir (ve gizle isim kısa gösterimi)
-          // ensure name is "Misafir" visible
-          const nameEl = document.getElementById('tg-name');
-          nameEl.textContent = 'Misafir';
+        // Telegram kullanıcı bilgisi
+        if (window.Telegram?.WebApp) {
+            const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+            if (tgUser) {
+                document.getElementById("tg-name").innerText = tgUser.username || tgUser.first_name;
+                document.getElementById("tg-avatar").src = `https://i.pravatar.cc/150?u=${tgUser.id}`;
+            }
         }
-      } catch (err) {
-        console.error('Telegram WebApp init error', err);
-      }
-    })();
-  </script>
+    </script>
 </body>
 </html>
